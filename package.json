@@ -1,0 +1,31 @@
+{
+  "name": "ts-echowo",
+  "version": "0.0.1",
+  "description": "Port of win-echowo to node / typescript",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf build/Debug/*",
+    "build": "npx tsc",
+    "runDebug": "node ./build/Debug/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Perceptified/node-echowo.git"
+  },
+  "keywords": [
+    "uwu",
+    "owo"
+  ],
+  "author": "Markus Aigner",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/Perceptified/node-echowo/issues"
+  },
+  "homepage": "https://github.com/Perceptified/node-echowo#readme",
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+  
+
+}
