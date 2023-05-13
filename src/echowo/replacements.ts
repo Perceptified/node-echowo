@@ -3,7 +3,7 @@ export class Replacements {
      * @description Provides the UwU-fied replacements for the input strings
      * @param inputString input to node-echowo
      */
-    public static UwuTransform(inputString : string) {
+    public static uwuTransform(inputString : string) {
         var transformedString : string
         var uwuIsms = new Map<string, string>()
         uwuIsms.set("ll", "ww")

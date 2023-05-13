@@ -24,8 +24,7 @@
   },
   "homepage": "https://github.com/Perceptified/node-echowo#readme",
   "devDependencies": {
+    "commander": "^10.0.1",
     "typescript": "^5.0.4"
   }
-  
-
 }
