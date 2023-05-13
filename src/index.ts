@@ -12,4 +12,5 @@ program.version(helpInstance.getProgramVersion())
 optionInstance.getOptions().forEach((value : string, key : string) => {
     program.option(key, value)
 })
+Replacements.uwuTransform("test")
 program.parse()

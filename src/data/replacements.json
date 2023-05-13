@@ -1,0 +1,14 @@
+{
+    "echowoReplacements" : {
+        "ll": "ww",
+        "orr": "oww",
+        "or" : "ow",
+        "er" : "ew",
+        "na" : "nya",
+        "nan" : "nyan",
+        "ma" : "mya",
+        "mam" : "myam",
+        "pl" : "pw",
+        "pr" : "pw"
+    }
+}

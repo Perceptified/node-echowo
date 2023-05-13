@@ -7,7 +7,6 @@ export class EchowoHelp {
         console.log(this.getCopyrightInfo())
         console.log(this.getProgramVersion())
         console.log(this.getHelpText())
-        // console.log(this.getOptions())
     }
     public getProgramName() : string {
         return programName
