@@ -4,9 +4,9 @@
     "programVersion" : "2023-13-05",
     "helpText" : "This software package takes an input string and OwO-ifies it.",
     "programDescription" : "owo-ifies input strings with random replacements and interjections",
-    "options" : {
-        "-h" :  "--help : print this help text and exit",
-        "-g" :  "--guaranteed : guarantees at least one interjection"
+    "echowoOptions" : {
+        "-g" : "guarantees at least one interjection",
+        "-v" : "print version information and exit"
     }
         
 }

@@ -2,14 +2,14 @@ import { Replacements } from "./echowo/replacements"
 import { Interjections } from "./echowo/interjections"
 import { Command } from 'commander'
 import { EchowoHelp } from "./echowo/help"
-
+import { EchowoOptions } from "./echowo/options"
 const program = new Command()
 const helpInstance = new EchowoHelp()
-
-program
-    .name(helpInstance.getProgramName())
-    .description(helpInstance.getProgramDescription())
-    .version(helpInstance.getProgramVersion())
-    //.option(helpInstance.getOptions().toString())
-Replacements.uwuTransform("test")
-Interjections.insertInterjections("Gosh dang doodle, I am jerking on my noodle!")
+const optionInstance = new EchowoOptions()
+program.name(helpInstance.getProgramName())
+program.description(helpInstance.getProgramDescription())
+program.version(helpInstance.getProgramVersion())
+optionInstance.getOptions().forEach((value : string, key : string) => {
+    program.option(key, value)
+})
+program.parse()

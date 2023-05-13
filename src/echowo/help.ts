@@ -1,5 +1,5 @@
-import { Help } from "commander"
 import { programName, copyrightInfo, programVersion, helpText, programDescription } from "../data/help.json"
+import { EchowoOptions } from "./options"
 
 export class EchowoHelp {
     public outputHelp() : void {
@@ -23,5 +23,9 @@ export class EchowoHelp {
     }
     public getProgramDescription() : string {
         return programDescription
+    }
+    public getOptions() : Map<string, string> {
+        var options = new EchowoOptions()
+        return options.getOptions()
     }
 }
