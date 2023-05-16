@@ -1,7 +1,7 @@
 {
     "echowoReplacements" : {
-        "ll": "ww",
-        "orr": "oww",
+        "ll" : "ww",
+        "orr" : "oww",
         "or" : "ow",
         "er" : "ew",
         "na" : "nya",
@@ -9,6 +9,8 @@
         "ma" : "mya",
         "mam" : "myam",
         "pl" : "pw",
-        "pr" : "pw"
+        "pr" : "pw",
+        "ulge" : "ulgy-wulgy",
+        "eck": "ecky-wecky"
     }
 }

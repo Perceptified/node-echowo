@@ -7,8 +7,26 @@ export class Replacements {
     public static uwuTransform(inputString : string) {
         var transformedString : string
         var uwuIsms = new Map<string, string>()
-        uwuIsms.forEach((value:string, key:string) => {
-            console.log(key,value)
-        })
+        uwuIsms.set("er", echowoReplacements.er)
+        uwuIsms.set("ll", echowoReplacements.ll)
+        uwuIsms.set("ma", echowoReplacements.ma)
+        uwuIsms.set("mam", echowoReplacements.mam)
+        uwuIsms.set("na", echowoReplacements.na)
+        uwuIsms.set("nan", echowoReplacements.nan)
+        uwuIsms.set("or", echowoReplacements.or)
+        uwuIsms.set("orr", echowoReplacements.orr)
+        uwuIsms.set("pl", echowoReplacements.pl)
+        uwuIsms.set("pr", echowoReplacements.pr)
+        uwuIsms.set("ulge", echowoReplacements.ulge)
+        // uwuIsms.set("eck", echowoReplacements.eck)
+
+        for(let content of inputString) {
+            uwuIsms.forEach((value, key) => {
+                // console.log("found: " + key + " Replacing With: " + value)
+                inputString = inputString.replace(key, value)
+            })
+        }
+        return inputString
+        // console.log(inputString)
     }
 }

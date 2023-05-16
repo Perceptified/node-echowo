@@ -12,5 +12,6 @@ program.version(helpInstance.getProgramVersion())
 optionInstance.getOptions().forEach((value : string, key : string) => {
     program.option(key, value)
 })
-Replacements.uwuTransform("test")
+// Replacements.uwuTransform("Lola met Mark at the mall. She noticed his bulge, cracking her neck. He was really tall. They walked and talked, exploring every store. Lola's eyes sparkled with delight as they found a plush, purple pillow. Mark couldn't help but smile, knowing he had found the perfect gift.")
+console.log(Interjections.insertInterjections("Lola met Mark at the mall. She noticed his bulge, cracking her neck. He was really tall. They walked and talked, exploring every store. Lola's eyes sparkled with delight as they found a plush, purple pillow. Mark couldn't help but smile, knowing he had found the perfect gift."))
 program.parse()
