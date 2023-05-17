@@ -29,9 +29,9 @@ export class Interjections {
         // console.log(interjectionIndices.toString())
         for(let counter = 0; counter < interjectionIndices.length; counter = counter + 1) {
             let number = randomGenerator.getRandomNumber(0, uwuInterjections.length)
-            inputCharArray[spaceIndices[counter]] = " " + uwuInterjections[number] + " "
+            inputCharArray[spaceIndices[interjectionIndices[counter]]] = " " + uwuInterjections[number] + " "
         }
         inputString = inputCharArray.join("")
-        return interjectionIndices.toString()
+        return inputString
     }
 }

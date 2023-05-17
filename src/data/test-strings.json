@@ -1,5 +1,7 @@
 {
-    "Normal" : "",
-    "Short" : "",
-    "Long" : ""
+    "TestStrings" : {
+        "Normal" : "Lola met Mark at the mall. She noticed his bulge, cracking her neck. He was really tall. They walked and talked, exploring every store. Lola's eyes sparkled with delight as they found a plush, purple pillow. Mark couldn't help but smile, knowing he had found the perfect gift.",
+        "Short" : "I noticed your bulge",
+        "Long" : ""
+    }
 }
