@@ -130,3 +130,4 @@ dist
 .pnp.*
 build/Debug/*
 build/Release/*
+.DS_Store

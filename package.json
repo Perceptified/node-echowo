@@ -7,7 +7,20 @@
     "clean": "rm -rf build/Debug/*",
     "build": "npx tsc --sourceMap true",
     "runDebug": "node ./build/Debug/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cleanRelease": "rm -rf ./build/Release/*",
+    "buildRelease": "npm run cleanRelease && npm run compileRelease && npm run uglifyRelease && npm run packageRelease",
+    "packageRelease": "npm run packageMac && npm run packageLinux && npm run packageWindows",
+    "packageWindows" : "npx nexe build/Release/index.js -o build/Release/node-echowo --build --python python3 -t windows-x64",
+    "packageMac" : "npx nexe build/Release/index.js -o build/Release/node-echowo-mac --build --python python3 -t mac-arm64",
+    "packageLinux" : "npx nexe build/Release/index.js -o build/Release/node-echowo-linux --build --python python3 -t linux-x64",
+    "uglifyRelease": "npm run uglifyIndex && npm run uglifyHelp && npm run uglifyInterjection && npm run uglifyOptions && npm run uglifyRandomGenerator && npm run uglifyReplacements",
+    "compileRelease": "npx tsc --outDir ./build/Release",
+    "uglifyIndex": "npx uglify-js ./build/Release/index.js -m -c -o ./build/Release/index.js",
+    "uglifyHelp": "npx uglify-js ./build/Release/echowo/help.js -m -c -o ./build/Release/echowo/help.js",
+    "uglifyInterjection": "npx uglify-js ./build/Release/echowo/interjections.js -m -c -o ./build/Release/echowo/interjections.js",
+    "uglifyOptions": "npx uglify-js ./build/Release/echowo/options.js -m -c -o ./build/Release/echowo/options.js",
+    "uglifyRandomGenerator": "npx uglify-js ./build/Release/echowo/random-generator.js -m -c -o ./build/Release/echowo/random-generator.js",
+    "uglifyReplacements": "npx uglify-js ./build/Release/echowo/replacements.js -m -c -o ./build/Release/echowo/replacements.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +38,10 @@
   "homepage": "https://github.com/Perceptified/node-echowo#readme",
   "devDependencies": {
     "commander": "^10.0.1",
+    "nexe": "^4.0.0-rc.2",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "uglify-js": "^3.17.4"
   }
 }
