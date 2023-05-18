@@ -16,7 +16,7 @@ export class Interjections {
                 spaceIndices.push(counter)
             }
         }
-        if(guaranteed === true) {
+        if(guaranteed) {
             numberOfInterjections = randomGenerator.getRandomNumber(1, spaceIndices.length)
         }
         else {
@@ -26,7 +26,6 @@ export class Interjections {
             let number = randomGenerator.getRandomNumber(0, spaceIndices.length)
             interjectionIndices.push(number)
         }
-        // console.log(interjectionIndices.toString())
         for(let counter = 0; counter < interjectionIndices.length; counter = counter + 1) {
             let number = randomGenerator.getRandomNumber(0, uwuInterjections.length)
             inputCharArray[spaceIndices[interjectionIndices[counter]]] = " " + uwuInterjections[number] + " "
