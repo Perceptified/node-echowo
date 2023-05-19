@@ -10,7 +10,7 @@
     "cleanRelease": "rm -rf ./build/Release/*",
     "buildRelease": "npm run cleanRelease && npm run compileRelease && npm run uglifyRelease && npm run packageRelease",
     "packageRelease": "npm run packageMac && npm run packageLinux && npm run packageWindows",
-    "packageWindows" : "npx nexe build/Release/index.js -o build/Release/node-echowo --build --python python3 -t windows-x64",
+    "packageWindows" : "npx nexe build/Release/index.js -o build/Release/node-echowo --python python3 -t windows-x64-8.9.4",
     "packageMac" : "npx nexe build/Release/index.js -o build/Release/node-echowo-mac --build --python python3 -t mac-arm64",
     "packageLinux" : "npx nexe build/Release/index.js -o build/Release/node-echowo-linux --build --python python3 -t linux-x64",
     "uglifyRelease": "npm run uglifyIndex && npm run uglifyHelp && npm run uglifyInterjection && npm run uglifyOptions && npm run uglifyRandomGenerator && npm run uglifyReplacements",
