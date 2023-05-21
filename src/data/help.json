@@ -2,7 +2,7 @@
     "helpInfo" : {
         "programName" : "node-echowo",
         "copyrightInfo" : "Copyright 2023, Markus Aigner (perceptified@gmail.com)",
-        "programVersion" : "2023-18-05",
+        "programVersion" : "2023-21-05",
         "helpText" : "This software package takes an input string and OwO-ifies it. Invoked without the -c option, one interjection is guaranteed",
         "programDescription" : "owo-ifies input strings with random replacements and interjections"
     },
