@@ -9,10 +9,11 @@
     "runDebug": "node ./build/Debug/index.js",
     "cleanRelease": "rm -rf ./build/Release/*",
     "buildRelease": "npm run cleanRelease && npm run compileRelease && npm run packageRelease",
-    "packageRelease": "npm run packageMac && npm run packageWindows",
-    "packageWindows": "npx nexe build/Release/index.js -o build/Release/node-echowo --python python3 -t windows-x64-8.9.4",
-    "packageMac": "npx nexe build/Release/index.js -o build/Release/node-echowo-mac --build --python python3 -t mac-arm64",
-    "uglifyRelease": "npm run uglifyIndex && npm run uglifyHelp && npm run uglifyInterjection && npm run uglifyOptions && npm run uglifyRandomGenerator && npm run uglifyReplacements",
+    "packageRelease": "npm run packageMac && npm run packageWindows && npm run packageLinARM && npm run packageLinX64",
+    "packageWindows": "npx pkg build/Release/index.js -t windows-x64 -o build/Release/binaries/node-echowo.exe",
+    "packageMac": "npx pkg build/Release/index.js -t macos-arm64 -o build/Release/binaries/node-echowo-mac-arm64",
+    "packageLinARM": "npx pkg build/Release/index.js -t linux-arm64 -o build/Release/binaries/node-echowo-linux-arm64",
+    "packageLinX64": "npx pkg build/Release/index.js -t linux-x64 -o build/Release/binaries/node-echowo-linux-x64",
     "compileRelease": "npx tsc --outDir ./build/Release"
   },
   "repository": {
