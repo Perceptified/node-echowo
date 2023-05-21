@@ -1,20 +1,18 @@
 import { Replacements } from "./echowo/replacements"
 import { Interjections } from "./echowo/interjections"
-import { Command, OptionValues } from 'commander'
-import { EchowoHelp } from "./echowo/help"
+import { Command, OptionValues } from "commander"
 import { TestStrings } from "./data/test-strings.json"
-import { echowoOptions } from "./data/help.json"
+import { helpInfo, echowoOptions } from "./data/help.json"
 
 const program = new Command()
-const helpInstance = new EchowoHelp()
 let inputString : string
 let guaranteed : boolean
-program.name(helpInstance.getProgramName())
-    .description(helpInstance.getProgramDescription())
-    .version(helpInstance.getProgramVersion())
-    .option("-c, --conservative", echowoOptions["-c"], "false")
-    .argument("<inputString>", "Input String to be owo-fied.")
-    .parse()
+program.name(helpInfo.programName)
+    .description(helpInfo.programDescription)
+    .version(helpInfo.programVersion)
+    .option('-c, --conservative', echowoOptions["-c"], 'false')
+    .argument('<inputString>', 'Input String to be owo-fied.')
+program.parse(process.argv)
 const options = program.opts()
 if(options.conservative === true) {
     guaranteed = false
