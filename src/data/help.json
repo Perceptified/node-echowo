@@ -8,6 +8,5 @@
     },
     "echowoOptions" : {
         "-c" : "conservative mode: turns off guaranteed interjection"
-    }
-        
+    }       
 }
