@@ -1,12 +1,16 @@
 import { echowoReplacements } from "../data/replacements.json"
+import { fileHandler } from "./file-handling"
 export class Replacements {
     /**
      * @description Provides the UwU-fied replacements for the input strings
      * @param inputString input to node-echowo
      */
     public static uwuTransform(inputString : string) {
+        let myFileHandler = new fileHandler
         var transformedString : string
         var uwuIsms = new Map<string, string>()
+        uwuIsms = myFileHandler.loadData("replacements.json").echowoReplacements
+        
         uwuIsms.set("er", echowoReplacements.er)
         uwuIsms.set("ll", echowoReplacements.ll)
         uwuIsms.set("ma", echowoReplacements.ma)

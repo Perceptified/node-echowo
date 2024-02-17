@@ -1,8 +1,9 @@
 import { randomGenerator } from "./random-generator"
+import { fileHandler } from "./file-handling" 
+
 // import { uwuInterjections } from "../data/interjections.json"
 
-import * as path from "path"
-import * as fs from "fs"
+
 
 export class Interjections {
     /**
@@ -12,13 +13,8 @@ export class Interjections {
      */
 
     public static insertInterjections(inputString : string, guaranteed : boolean) {
-        function loadData(fileName: string) {
-            const filePath = path.join(process.execPath, "..", fileName)
-            // console.log(JSON.parse(fs.readFileSync(filePath, 'utf-8')).uwuInterjections.toString())
-            return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
-        }
-        
-        let uwuInterjections = loadData("interjections.json").uwuInterjections;
+        let myFileHandler = new fileHandler()
+        let uwuInterjections = myFileHandler.loadData("interjections.json").uwuInterjections
         console.log(uwuInterjections.toString())
         let inputCharArray = Array.from(inputString)
         let spaceIndices = []
