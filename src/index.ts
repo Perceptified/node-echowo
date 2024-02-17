@@ -4,9 +4,11 @@ import { Command, OptionValues } from "commander"
 import { TestStrings } from "./data/test-strings.json"
 import { helpInfo, echowoOptions } from "./data/help.json"
 
+
 const program = new Command()
 let inputString : string
 let guaranteed : boolean
+
 program.name(helpInfo.programName)
     .description(helpInfo.programDescription)
     .version(helpInfo.programVersion)

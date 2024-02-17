@@ -8,7 +8,8 @@
     "build": "npx tsc --sourceMap true",
     "runDebug": "node ./build/Debug/index.js",
     "cleanRelease": "rm -rf ./build/Release/*",
-    "buildRelease": "npm run cleanRelease && npm run compileRelease && npm run packageRelease",
+    "copyConfig": "cp src/data/*.json ./build/Release/data",
+    "buildRelease": "npm run cleanRelease && npm run compileRelease && npm run copyConfig && npm run packageRelease",
     "packageRelease": "npm run packageMac && npm run packageWindows && npm run packageLinARM && npm run packageLinX64",
     "packageWindows": "npx pkg build/Release/index.js -t windows-x64 -o build/Release/binaries/node-echowo.exe",
     "packageMac": "npx pkg build/Release/index.js -t macos-arm64 -o build/Release/binaries/node-echowo-mac-arm64",
@@ -34,5 +35,10 @@
     "commander": "^10.0.1",
     "nexe": "^4.0.0-rc.2",
     "typescript": "^5.0.4"
+  },
+  "pkg": {
+    "assets": [
+      "build/Release/data/*.json"
+    ]
   }
 }
