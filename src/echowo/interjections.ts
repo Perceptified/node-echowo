@@ -1,9 +1,4 @@
 import { randomGenerator } from "./random-generator"
-import { fileHandler } from "./file-handling" 
-
-// import { uwuInterjections } from "../data/interjections.json"
-
-
 
 export class Interjections {
     /**
@@ -12,10 +7,7 @@ export class Interjections {
      * @returns the inputString with interjections
      */
 
-    public static insertInterjections(inputString : string, guaranteed : boolean) {
-        let myFileHandler = new fileHandler()
-        let uwuInterjections = myFileHandler.loadData("interjections.json").uwuInterjections
-        console.log(uwuInterjections.toString())
+    public static insertInterjections(inputString : string, uwuInterjections : string[], guaranteed : boolean) {
         let inputCharArray = Array.from(inputString)
         let spaceIndices = []
         let interjectionIndices = []

@@ -1,5 +1,23 @@
 {
-    "echowoReplacements" : {
+    "uwuInterjections" : [
+    "UwU",
+    "^_^",
+    "~=[„_„]",
+    "(^U^)",
+    "OwO",
+    "^w^",
+    "murr...",
+    "nya!",
+    "nyanyan!",
+    "huoooh...",
+    ":3",
+    "*wags tail*",
+    "nyea~",
+    "nyu...",
+    "rawr!",
+    "*pounces*"
+    ],
+    "uwuReplacements" : {
         "ll" : "ww",
         "orr" : "oww",
         "or" : "ow",
