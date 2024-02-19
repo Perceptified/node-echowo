@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "pwsh ./build/buildScript.ps1 -mode clean",
+    "cleanDebug": "pwsh ./build/buildScript.ps1 -mode 'clean debug'",
     "build": "pwsh ./build/buildScript.ps1 -mode build",
     "runDebug": "pwsh ./build/buildScript.ps1 -mode 'run debug'",
     "cleanRelease": "pwsh ./build/buildScript.ps1 -mode 'clean release'", 

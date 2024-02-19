@@ -9,48 +9,50 @@ $osNames = @{
     "linX64" = "linux-x64"; 
 }
 $directories = @{
-    "projectRootDirectory" = "./";
-    "source" = "./src";
-    "Build" = "./build";
-    "Debug" = "./build/Debug";
-    "Release" = "./build/Release";
+    "projectRootDirectory" = $PSCommandPath + "/../../"
 }
-$directories.Add("sourceData", ($directories.source.toString() + "/data"))
-$directories.Add("ReleaseBinaries", ($directories.Release.toString() + "/binaries"))
-$directories.Add("MacArm64Binaries", ($directories.ReleaseBinaries.toString() + "/" + $osNames.macOsArm64.toString()))
-$directories.Add("MacArm64Data", ($directories.MacArm64Binaries.toString() + "/data"))
-$directories.Add("WinX64Binaries", ($directories.ReleaseBinaries.toString() + "/" + $osNames.winX64.toString()))
-$directories.Add("WinX64Data", ($directories.WinX64Binaries.toString() + "/data"))
-$directories.Add("LinArmBinaries", ($directories.ReleaseBinaries.toString() + "/" + $osNames.linArm64.toString()))
-$directories.Add("LinArmData", ($directories.LinArmBinaries.toString() + "/data"))
-$directories.Add("linX64Binaries", ($directories.ReleaseBinaries.toString() + "/" + $osNames.linX64.toString()))
-$directories.Add("linX64Data", ($directories.linX64Binaries.toString() + "/data"))
+$directories.Add("source", ($directories.projectRootDirectory + "/src"))
+$directories.Add("build", ($directories.projectRootDirectory + "/build"))
+$directories.Add("debug", ($directories.build + "/Debug"))
+$directories.Add("sourceData", ($directories.source + "/data"))
+$directories.Add("release", ($directories.build + "/Release"))
+$directories.Add("ReleaseBinaries", ($directories.Release + "/binaries"))
+$directories.Add("MacArm64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.macOsArm64.toString()))
+$directories.Add("MacArm64Data", ($directories.MacArm64Binaries + "/data"))
+$directories.Add("WinX64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.winX64.toString()))
+$directories.Add("WinX64Data", ($directories.WinX64Binaries + "/data"))
+$directories.Add("LinArmBinaries", ($directories.ReleaseBinaries + "/" + $osNames.linArm64.toString()))
+$directories.Add("LinArmData", ($directories.LinArmBinaries + "/data"))
+$directories.Add("linX64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.linX64.toString()))
+$directories.Add("linX64Data", ($directories.linX64Binaries + "/data"))
 
-switch($mode) {
-    "clean"  {
-        Write-Host("Invoked with Mode Clean, cleaning all.")
-        if(Get-Item $directories.Debug.toString() -ne "") {
-            Remove-Item $directories.Debug.toString() + "/*" -Recurse -Force
-            Remove-Item $directories.Release.toString() + "/*" -Recurse -Force
-        }
-        else {
-            Write-Host("Nothing to clean.")
-        }
-    }
-    "build debug" {
-        Write-Host("Invoked with mode Build.")
+function prepareDebugDirectory {
+    New-Item $directories.debug -ItemType Directory
+}
+function prepareReleaseDirectory {
 
-    }
-    "clean debug" {
-        Write-Host("Invoked with mode Clean Debug.")
+}
 
+function cleanDirectory {
+    Param(
+        $directory
+    )
+    Write-Host(Get-ChildItem $directory)
+    Remove-Item $directory -Recurse -Force
+}
+
+switch ($mode) {
+    "clean" {
+        Write-Host("Called with: " + $mode + " cleaning all.")
+        cleanDirectory -directory $directories.Release
+        cleanDirectory -directory $directories.Debug
     }
     "clean release" {
-        Write-Host("Invoked with mode Clean Release")
-
+        Write-Host("Called with: " + $mode)
+        cleanDirectory -directory $directories.Release
     }
-    "build release" {
-        Write-Host("Invoked with mode Package Release.")
-
+    "clean debug" {
+        Write-Host("Called with: " + $mode)
+        cleanDirectory -directory $directories.Debug
     }
 }
