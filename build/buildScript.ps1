@@ -3,34 +3,56 @@ Param(
 )
 
 $osNames = @{
-    "macOsArm64" = "macos-arm64";
-    "winX64" = "windows-x64";
-    "linArm64" = "linux-arm64";
-    "linX64" = "linux-x64"; 
+    "MacOsArm64" = "macos-arm64";
+    "WinX64" = "windows-x64";
+    "LinArm64" = "linux-arm64";
+    "LinX64" = "linux-x64"; 
 }
 $directories = @{
-    "projectRootDirectory" = $PSCommandPath + "/../../"
+    "ProjectRootDirectory" = $PSCommandPath + "/../../"
 }
-$directories.Add("source", ($directories.projectRootDirectory + "/src"))
-$directories.Add("build", ($directories.projectRootDirectory + "/build"))
-$directories.Add("debug", ($directories.build + "/Debug"))
-$directories.Add("sourceData", ($directories.source + "/data"))
-$directories.Add("release", ($directories.build + "/Release"))
+$directories.Add("Source", ($directories.ProjectRootDirectory + "/src"))
+$directories.Add("Build", ($directories.ProjectRootDirectory + "/build"))
+$directories.Add("Debug", ($directories.Build + "/Debug"))
+$directories.Add("SourceData", ($directories.Source + "/data"))
+$directories.Add("Release", ($directories.Build + "/Release"))
 $directories.Add("ReleaseBinaries", ($directories.Release + "/binaries"))
-$directories.Add("MacArm64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.macOsArm64.toString()))
-$directories.Add("MacArm64Data", ($directories.MacArm64Binaries + "/data"))
-$directories.Add("WinX64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.winX64.toString()))
-$directories.Add("WinX64Data", ($directories.WinX64Binaries + "/data"))
-$directories.Add("LinArmBinaries", ($directories.ReleaseBinaries + "/" + $osNames.linArm64.toString()))
-$directories.Add("LinArmData", ($directories.LinArmBinaries + "/data"))
-$directories.Add("linX64Binaries", ($directories.ReleaseBinaries + "/" + $osNames.linX64.toString()))
-$directories.Add("linX64Data", ($directories.linX64Binaries + "/data"))
+$directories.Add("PlatformBinaryDirectories", @{
+    "MacArm64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.MacOsArm64.toString());
+    "WinX64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.WinX64.toString());
+    "LinArmBinaries" = ($directories.ReleaseBinaries + "/" + $osNames.LinArm64.toString());
+    "linX64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.LinX64.toString())
+})
+$directories.Add("PlatformDataDirectories", @{
+    "MacArm64Data" = ($directories.PlatformBinaryDirectories.MacArm64Binaries + "/" + "data");
+    "WinX64Data" = ($directories.PlatformBinaryDirectories.WinX64Binaries + "/" + "data");
+    "LinArmData" = ($directories.PlatformBinaryDirectories.LinArmBinaries + "/" + "data");
+    "linX64Data" = ($directories.PlatformBinaryDirectories.LinX64Binaries + "/" + "data")
+})
 
 function prepareDebugDirectory {
-    New-Item $directories.debug -ItemType Directory
+    Set-Location $directories.ProjectRootDirectory
+    if(Test-Path $directories.Debug) {
+        cleanDirectory -directory $directories.Debug
+    }
+    New-Item $directories.Debug -ItemType Directory
 }
 function prepareReleaseDirectory {
-
+    Set-Location $directories.ProjectRootDirectory
+    if(Test-Path $directories.Release) {
+        cleanDirectory -directory $directories.Release
+    }
+    New-Item $directories.Release -ItemType Directory
+    New-Item $directories.ReleaseBinaries -ItemType Directory
+    foreach($item in $directories.PlatformBinaryDirectories.Keys) {
+        Write-Host("Creating: " + $directories.PlatformBinaryDirectories[$item])
+        New-Item $directories.PlatformBinaryDirectories[$item] -ItemType Directory
+    }
+    foreach($item in $directories.PlatformDataDirectories.Keys) {
+        Write-Host("Creating: " + $directories.PlatformDataDirectories[$item])
+        New-Item $directories.PlatformDataDirectories[$item] -ItemType Directory
+    }
+    
 }
 
 function cleanDirectory {
@@ -41,18 +63,23 @@ function cleanDirectory {
     Remove-Item $directory -Recurse -Force
 }
 
+Write-Host("Called with: " + $mode)
 switch ($mode) {
     "clean" {
-        Write-Host("Called with: " + $mode + " cleaning all.")
         cleanDirectory -directory $directories.Release
         cleanDirectory -directory $directories.Debug
     }
     "clean release" {
-        Write-Host("Called with: " + $mode)
         cleanDirectory -directory $directories.Release
     }
     "clean debug" {
-        Write-Host("Called with: " + $mode)
         cleanDirectory -directory $directories.Debug
+    }
+    "build debug" {
+        prepareDebugDirectory
+        npx tsc --outDir $directories.Debug --sourceMap true
+    }
+    "build release" {
+        prepareReleaseDirectory
     }
 }

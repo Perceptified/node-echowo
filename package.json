@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "pwsh ./build/buildScript.ps1 -mode clean",
     "cleanDebug": "pwsh ./build/buildScript.ps1 -mode 'clean debug'",
-    "build": "pwsh ./build/buildScript.ps1 -mode build",
+    "buildDebug": "pwsh ./build/buildScript.ps1 -mode 'build debug'",
     "runDebug": "pwsh ./build/buildScript.ps1 -mode 'run debug'",
     "cleanRelease": "pwsh ./build/buildScript.ps1 -mode 'clean release'", 
     "buildRelease" : "pwsh ./build/buildScript.ps1 -mode 'build release'"
