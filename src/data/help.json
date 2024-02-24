@@ -1,11 +1,11 @@
 {
     "helpInfo" : {
         "programName" : "node-echowo",
-        "copyrightInfo" : "Copyright 2023, Markus Aigner (perceptified@gmail.com)",
+        "copyrightInfo" : "Copyright 2024, Markus Aigner (perceptified@gmail.com)",
         "licenseInfo" : "This program is licensed under the GNU GPL version 3 - see LICENSE.txt for information.",
         "licenseLink" : "See also: https://www.gnu.org/licenses/gpl-3.0",
         "sourceLink" : "Source code can be obtained at: https://github.com/Perceptified/node-echowo",
-        "programVersion" : "2024-18-02",
+        "programVersion" : "2024-24-02",
         "helpText" : "This software package takes an input string and OwO-ifies it. Invoked without the -c option, one interjection is guaranteed",
         "programDescription" : "owo-ifies input strings with random replacements and interjections",
         "configuration" : "Configuration: The replacements and interjections needed for proper owo-ification are stored in the file ./data/config.json"

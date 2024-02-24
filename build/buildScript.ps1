@@ -2,12 +2,7 @@ Param(
     $mode
 )
 
-$osNames = @{
-    "MacOsArm64" = "macos-arm64";
-    "WinX64" = "windows-x64";
-    "LinArm64" = "linux-arm64";
-    "LinX64" = "linux-x64"; 
-}
+$osNames = ("windows-x64", "linux-x64", "linux-arm64", "macos-arm64")
 $directories = @{
     "ProjectRootDirectory" = $PSCommandPath + "/../../"
 }
@@ -17,19 +12,15 @@ $directories.Add("Debug", ($directories.Build + "/Debug"))
 $directories.Add("SourceData", ($directories.Source + "/data"))
 $directories.Add("Release", ($directories.Build + "/Release"))
 $directories.Add("ReleaseBinaries", ($directories.Release + "/binaries"))
-$directories.Add("PlatformBinaryDirectories", @{
-    "MacArm64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.MacOsArm64.toString());
-    "WinX64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.WinX64.toString());
-    "LinArmBinaries" = ($directories.ReleaseBinaries + "/" + $osNames.LinArm64.toString());
-    "linX64Binaries" = ($directories.ReleaseBinaries + "/" + $osNames.LinX64.toString())
-})
-$directories.Add("PlatformDataDirectories", @{
-    "MacArm64Data" = ($directories.PlatformBinaryDirectories.MacArm64Binaries + "/" + "data");
-    "WinX64Data" = ($directories.PlatformBinaryDirectories.WinX64Binaries + "/" + "data");
-    "LinArmData" = ($directories.PlatformBinaryDirectories.LinArmBinaries + "/" + "data");
-    "linX64Data" = ($directories.PlatformBinaryDirectories.LinX64Binaries + "/" + "data")
-})
-
+$directories.Add("PlatformBinaryDirectories", @{})
+foreach($item in $osNames) {
+    $directories.PlatformBinaryDirectories.Add($item, ($directories.ReleaseBinaries + "/" + $item))
+}
+$directories.Add("PlatformDataDirectories", @{})
+foreach($item in $osNames) {
+    $directories.PlatformDataDirectories.Add(($item + "Data"), $directories.PlatformBinaryDirectories[$item] + "/" + "data")
+}
+Write-Host $directories.Keys $directories.Values
 function prepareDebugDirectory {
     Set-Location $directories.ProjectRootDirectory
     if(Test-Path $directories.Debug) {
@@ -81,5 +72,23 @@ switch ($mode) {
     }
     "build release" {
         prepareReleaseDirectory
+        npx tsc --outDir $directories.Release --removeComments
+        foreach($item in $directories.PlatformDataDirectories.Keys) {
+            Copy-Item -Path ($directories.SourceData + "/" + "config.json") -Destination $directories.PlatformDataDirectories[$item]
+        }
+        foreach($item in $osNames) {
+            $inputFile = $directories.Release + "/" + "index.js"
+            $outputFile = $directories.PlatformBinaryDirectories[$item] + "/" + "node-echowo"
+            npx pkg $inputFile -t $item -o $outputFile
+        }
+        foreach($item in $directories.PlatformBinaryDirectories.Keys) {
+            Copy-Item -Path ($directories.ProjectRootDirectory + "/" + "LICENSE") -Destination $directories.PlatformBinaryDirectories[$item]
+        }
+        foreach($item in $osNames) {
+            Set-Location $directories.ReleaseBinaries
+            $outFile = $item + ".zip"
+            $inDirectory = $item + "/" + "*"
+            zip $outFile $inDirectory
+        }
     }
 }
