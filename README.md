@@ -25,10 +25,7 @@ saved and handled as an array, while the replacements are done as a Key/Value pa
 then replaces it with the value assigned to that key.
 
 ## Options
--c 
-: turns off guaranteed interjection
--h 
-: displays help information and exits
--v 
-: displays version information and exits
+- -c : turns off guaranteed interjection
+- -h : displays help information and exits
+- -v : displays version information and exits
 
