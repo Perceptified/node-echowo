@@ -1,0 +1,34 @@
+{
+    "uwuInterjections" : [
+    "UwU",
+    "^_^",
+    "~=[„_„]",
+    "(^U^)",
+    "OwO",
+    "^w^",
+    "murr...",
+    "nya!",
+    "nyanyan!",
+    "huoooh...",
+    ":3",
+    "*wags tail*",
+    "nyea~",
+    "nyu...",
+    "rawr!",
+    "*pounces*"
+    ],
+    "uwuReplacements" : {
+        "ll" : "ww",
+        "orr" : "oww",
+        "or" : "ow",
+        "er" : "ew",
+        "na" : "nya",
+        "nan" : "nyan",
+        "ma" : "mya",
+        "mam" : "myam",
+        "pl" : "pw",
+        "pr" : "pw",
+        "ulge" : "ulgy-wulgy",
+        "eck": "ecky-wecky"
+    }
+}

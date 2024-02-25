@@ -86,9 +86,11 @@ switch ($mode) {
         }
         foreach($item in $osNames) {
             Set-Location $directories.ReleaseBinaries
-            $outFile = $item + ".zip"
-            $inDirectory = $item + "/" + "*"
-            zip $outFile $inDirectory
+            $outFile = ("./" + $item + ".zip")
+            $inDirectory = ("./" + $item + "/" + "**")
+            # $outFile
+            # $inDirectory
+            zip -r $outFile $inDirectory
         }
     }
 }
