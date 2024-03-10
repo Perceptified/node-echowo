@@ -9,6 +9,7 @@ $directories = @{
 $directories.Add("Source", ($directories.ProjectRootDirectory + "/src"))
 $directories.Add("Build", ($directories.ProjectRootDirectory + "/build"))
 $directories.Add("Debug", ($directories.Build + "/Debug"))
+$directories.Add("DebugData", ($directories.Debug + "/data"))
 $directories.Add("SourceData", ($directories.Source + "/data"))
 $directories.Add("Release", ($directories.Build + "/Release"))
 $directories.Add("ReleaseBinaries", ($directories.Release + "/binaries"))
@@ -27,6 +28,7 @@ function prepareDebugDirectory {
         cleanDirectory -directory $directories.Debug
     }
     New-Item $directories.Debug -ItemType Directory
+    New-Item $directories.DebugData -ItemType Directory
 }
 function prepareReleaseDirectory {
     Set-Location $directories.ProjectRootDirectory
@@ -68,6 +70,9 @@ switch ($mode) {
     }
     "build debug" {
         prepareDebugDirectory
+        Copy-Item -Path ($directories.SourceData + "/" + "config.json") -Destination $directories.DebugData
+        Copy-Item -Path ($directories.SourceData + "/" + "help.json") -Destination $directories.DebugData
+        Copy-Item -Path ($directories.SourceData + "/" + "test-strings.json") -Destination $directories.DebugData
         npx tsc --outDir $directories.Debug --sourceMap true
     }
     "build release" {
@@ -88,8 +93,6 @@ switch ($mode) {
             Set-Location $directories.ReleaseBinaries
             $outFile = ("./" + $item + ".zip")
             $inDirectory = ("./" + $item + "/" + "**")
-            # $outFile
-            # $inDirectory
             zip -r $outFile $inDirectory
         }
     }
