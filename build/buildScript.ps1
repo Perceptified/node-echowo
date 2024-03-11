@@ -56,6 +56,14 @@ function cleanDirectory {
     Remove-Item $directory -Recurse -Force
 }
 
+function buildDebug {
+    prepareDebugDirectory
+    Copy-Item -Path ($directories.SourceData + "/" + "config.json") -Destination $directories.DebugData
+    Copy-Item -Path ($directories.SourceData + "/" + "help.json") -Destination $directories.DebugData
+    Copy-Item -Path ($directories.SourceData + "/" + "test-strings.json") -Destination $directories.DebugData
+    npx tsc --outDir $directories.Debug --sourceMap true
+}
+
 Write-Host("Called with: " + $mode)
 switch ($mode) {
     "clean" {
@@ -70,10 +78,7 @@ switch ($mode) {
     }
     "build debug" {
         prepareDebugDirectory
-        Copy-Item -Path ($directories.SourceData + "/" + "config.json") -Destination $directories.DebugData
-        Copy-Item -Path ($directories.SourceData + "/" + "help.json") -Destination $directories.DebugData
-        Copy-Item -Path ($directories.SourceData + "/" + "test-strings.json") -Destination $directories.DebugData
-        npx tsc --outDir $directories.Debug --sourceMap true
+        buildDebug
     }
     "build release" {
         prepareReleaseDirectory
@@ -95,5 +100,10 @@ switch ($mode) {
             $inDirectory = ("./" + $item + "/" + "**")
             zip -r $outFile $inDirectory
         }
+    }
+    "run debug" {
+        prepareDebugDirectory
+        buildDebug
+        node $directories.debug + "/" + "index.js"
     }
 }

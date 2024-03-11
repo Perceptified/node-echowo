@@ -8,8 +8,8 @@
     "cleanDebug": "pwsh ./build/buildScript.ps1 -mode 'clean debug'",
     "buildDebug": "pwsh ./build/buildScript.ps1 -mode 'build debug'",
     "runDebug": "pwsh ./build/buildScript.ps1 -mode 'run debug'",
-    "cleanRelease": "pwsh ./build/buildScript.ps1 -mode 'clean release'", 
-    "buildRelease" : "pwsh ./build/buildScript.ps1 -mode 'build release'"
+    "cleanRelease": "pwsh ./build/buildScript.ps1 -mode 'clean release'",
+    "buildRelease": "pwsh ./build/buildScript.ps1 -mode 'build release'"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,11 @@
   },
   "homepage": "https://github.com/Perceptified/node-echowo#readme",
   "devDependencies": {
+    "@types/node": "^20.11.25",
+    "@types/tmi.js": "^1.8.6",
     "commander": "^10.0.1",
-    "nexe": "^4.0.0-rc.2",
+    "nexe": "^1.1.6",
+    "tmi": "^0.2.2",
     "typescript": "^5.0.4"
   },
   "pkg": {

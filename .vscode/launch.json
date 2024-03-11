@@ -15,6 +15,20 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
+        },
+        {
+            "type": "node",
+            "preLaunchTask": "buildDebug",
+            "request": "launch",
+            "name": "Node Custom Build launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/index.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.(m|c|)js",
+                "!**/node_modules/**"
+            ]
         }
     ]
 }
